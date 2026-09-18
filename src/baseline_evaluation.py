@@ -1,4 +1,3 @@
-# ----- imports -----
 import pandas as pd
 import numpy as np
 from xgboost import XGBClassifier
@@ -8,17 +7,17 @@ from sklearn.model_selection import cross_validate, cross_val_score, GridSearchC
 from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
 import joblib
 
-# ----- fitting models -----
+
 def run_baseline_eval(X_train, y_train, SEED=42, cv=TimeSeriesSplit(n_splits=3)):
     
-    # ----- dumb baseline -----
+    # dumb baseline
     print(f"Majority class baseline: {round(y_train.value_counts(normalize=True).max(), 3)}")
 
-    # ----- Elo-only baseline -----
+    # Elo-only baseline
     elo_only_auc = cross_val_score(LogisticRegression(), X_train[['elo_delta']], y_train, cv=cv, scoring='roc_auc').mean()
     print(f"Elo-only AUC: {elo_only_auc:.2f}")
 
-    # ----- comparing baseline models -----
+    # comparing baseline models
     baseline_models = {
         'Logistic Regression': LogisticRegression(max_iter=1000, random_state=SEED),
         'Random Forest':       RandomForestClassifier(n_estimators=100, random_state=SEED, n_jobs=-1),
