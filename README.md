@@ -28,7 +28,7 @@
 ## Usage Guide
 Clone the repository and install the required dependencies:
 ```bash
-git clone https://github.com/vphngt/lol-match-outcome-prediction
+git clone https://github.com/vphngt/lol-match-outcome-prediction.git
 cd lol-match-predictor
 pip install -r requirements.txt
 ```
